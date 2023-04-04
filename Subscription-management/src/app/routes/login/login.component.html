@@ -1,0 +1,27 @@
+<div class="login">
+    
+    <div class="form-container">
+        <img src="../../../assets/jan-antonin-kolar-YNP2p8bAflo-unsplash.jpg"  class="imgbanner" alt="">
+    <form class="custom-form" method="post">
+        
+      <h1>Login</h1>
+      <input
+        type="UserName"
+        [(ngModel)]="UserName"
+        name="email"
+        placeholder="User Name"
+        required
+      />
+      <input
+        type="Password"
+        [(ngModel)]="Password"
+        name="Password"
+        placeholder="Password"
+        required="required"
+      />
+      <div class="button-container">
+      <button type="submit" (click)="login()">Log in</button>
+    </div>
+    </form>
+</div>
+  </div>
