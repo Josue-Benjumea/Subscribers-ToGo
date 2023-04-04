@@ -1,1 +1,30 @@
-<p>home works!</p>
+<!-- Devs -->
+<div class="d-flex flex-row">
+    <div class="container-fluid px-5 d-flex flex-column justify-content-evenly ">
+        <table class="table " style="max-width: 5rem;">
+          <thead>
+            <tr style="color: white; ">
+              <th></th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Codigo De Pais</th>
+              <th>Telefono</th>
+              <th>Trabajo</th>
+              <th>Area</th>
+              <th>Temas</th>
+            </tr>
+          </thead>
+          <tbody style="color: white; ">
+            <tr *ngFor="let sub of this.apir.subs.data">
+              <td>{{ sub.Name}}</td>
+              <td>{{ sub.Email}}</td>
+              <td>{{ sub.CountryCode}}</td>
+              <td>{{ sub.PhoneNumber}}</td>
+              <td>{{ sub.JobTitle}}</td>
+              <td>{{ sub.Area}}</td>
+              <td>{{ sub.Topics}}</td>
+              
+            </tr>
+          </tbody>
+        </table>
+      

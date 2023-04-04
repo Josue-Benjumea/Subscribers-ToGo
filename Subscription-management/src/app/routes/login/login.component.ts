@@ -28,22 +28,20 @@ export class LoginComponent {
       text:'Something went wrong!',
      })
     }
-    else{
-    this.apir.login(user).subscribe(  data => {
+    else{this.apir.login(user).subscribe( data => {
       this.apir.setToken(data.Token);
-      this.router.navigateByUrl('/home');
       console.log(data)
+      /* this.router.navigateByUrl('/'); */
+    });
+      (error:any) => {
+        Swal.fire({
+          icon: 'error',
+          title: error.error.error,
+          text: 'Something went wrong!',
+        });
+      }
     
-      
-    },
-    (error) => {
-      Swal.fire({
-        icon: 'error',
-        title: error.error.error,
-        text: 'Something went wrong!',
-      });
+
     }
-  );
-    };
   }
 }
