@@ -5,6 +5,8 @@ import { ApirService } from 'src/app/services/apir.service';
 import { ResponseI } from 'src/app/models/response/response.module';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { CreateSubI } from 'src/app/models/create/create.module';
+import { jsDocComment } from '@angular/compiler';
 
 @Component({
   selector: 'app-create-sub',
@@ -12,22 +14,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-sub.component.css']
 })
 export class CreateSubComponent {
-
-
+   createSubs: CreateSubI | undefined
+/* Capturar Datos */
   newSub = new FormGroup({
-    Name: new FormControl(''),
-    Email: new FormControl(''),
-    CountryCode: new FormControl(''),
-    PhoneNumber: new FormControl(''),
-    Area: new FormControl(''),
-    JobTitle: new FormControl(''),
-    Topics: new FormControl([]),
+    'Name': new FormControl("",Validators.required),
+    'Email': new FormControl("",Validators.required),
+    'CountryCode': new FormControl("",Validators.required),
+    'PhoneNumber': new FormControl(Validators.required),
+    'Area': new FormControl("",Validators.required),
+    'JobTitle': new FormControl("",Validators.required),
+    'Topics': new FormControl([],Validators.required),
   });
+
+  
   constructor( public apir:ApirService,  public router:Router){}
-  postForm(form:any){
-    console.log(form)
-   this.apir.createSub(form).subscribe(data =>{
-    console.log(data)
-   })
-  }
+ 
+ /* Enviar Formulario */
+  postForm(Form:any){
+return this.apir.createSub(Form.value).subscribe(data=>{
+  console.log(data)
+})
+}
+
+ 
 }

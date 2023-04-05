@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApirService } from 'src/app/services/apir.service';
 
 
 @Component({
@@ -9,4 +10,5 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
 
+  constructor(public apir:ApirService){}
 }

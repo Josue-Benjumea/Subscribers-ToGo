@@ -7,6 +7,8 @@ import jwtDecode from 'jwt-decode';
 import { LoginI } from '../models/login/login.module';
 import { ResponseI } from '../models/response/response.module';
 import { subsI } from '../models/subs/subs.module';
+import { CreateSubI } from '../models/create/create.module';
+import { AnyArray } from 'mongoose';
 
 @Injectable({
   providedIn: 'root',
@@ -14,13 +16,16 @@ import { subsI } from '../models/subs/subs.module';
 export class ApirService {
   url = 'https://lab.app.invertebrado.co/api/';
   subs: any;
-  currentSub: subsI | undefined;
+  currentSub: subsI | any;
+  currentCreate: CreateSubI | any; 
 
   constructor(
     private http: HttpClient,
     public router: Router,
     private cookies: CookieService
-  ) {}
+  ) {
+   
+  }
 
   /* Funcion de Login */
   login(form: LoginI): Observable<ResponseI> {
@@ -58,8 +63,41 @@ export class ApirService {
     );
   }
 
-  /* Agregar Suscriptor */
-  createSub(form:string):Observable<ResponseI>{
-    return this.http.post<ResponseI>(`${this.url}subscribers/`,form)
+  logOut() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+    return;
   }
+  isLoggedIn() {
+    let token = localStorage.getItem('token') || false;
+
+    if (token) {
+      return true;
+    }
+
+    return false;
+  }
+
+  decodeToken(): any {
+    let token = localStorage.getItem('token');
+    let decoded = jwtDecode(token || 'Error en token');
+    console.log(decoded) // retornar el payload del token
+    return decoded;
+  }
+
+
+
+
+  /* Agregar Suscriptor */
+  createSub(form:CreateSubI):Observable<CreateSubI>{
+  
+    
+    return this.http.post<CreateSubI>(`${this.url}subscribers`,form)
+  }
+
+
+  
+
+
+
 }

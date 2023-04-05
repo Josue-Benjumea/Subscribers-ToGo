@@ -5,13 +5,15 @@ import { LoginComponent } from './routes/login/login.component';
 import { HomeComponent } from './routes/home/home.component';
 import { CreateSubComponent } from './routes/create-sub/create-sub.component';
 import { EditComponent } from './routes/edit/edit.component';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
-
-  {path:'home', component:HomeComponent, pathMatch:'full'},
+  {path: '', pathMatch: 'full', redirectTo: ''},
+  {path:'home', component:HomeComponent, pathMatch:'full', canActivate:[AdminGuard]},
   {path:'login',component:LoginComponent,pathMatch:'full'},
-  {path:'nuevo', component:CreateSubComponent, pathMatch:'full'},
-  {path:'edit/:id', component:EditComponent, pathMatch:'full'},
+  {path:'nuevo', component:CreateSubComponent, pathMatch:'full',canActivate:[AdminGuard]},
+  {path:'edit/:id', component:EditComponent, pathMatch:'full',canActivate:[AdminGuard]},
+  
 
 
 ];
