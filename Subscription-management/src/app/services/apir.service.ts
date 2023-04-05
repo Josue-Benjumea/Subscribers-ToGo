@@ -1,75 +1,65 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-import jwtDecode from "jwt-decode"
-
+import jwtDecode from 'jwt-decode';
+import { LoginI } from '../models/login/login.module';
+import { ResponseI } from '../models/response/response.module';
+import { subsI } from '../models/subs/subs.module';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApirService {
-url = 'https://lab.app.invertebrado.co/api/';
-subs:any
+  url = 'https://lab.app.invertebrado.co/api/';
+  subs: any;
+  currentSub: subsI | undefined;
 
+  constructor(
+    private http: HttpClient,
+    public router: Router,
+    private cookies: CookieService
+  ) {}
 
-  constructor(public http:HttpClient, public router:Router, private cookies:CookieService) {
-
-
-   }
-    /* Funcion de Login */
-  login(user:any):Observable<any>{
-    return this.http.post('https://lab.app.invertebrado.co/api/account/login',user)
+  /* Funcion de Login */
+  login(form: LoginI): Observable<ResponseI> {
+    return this.http.post<ResponseI>(
+      'https://lab.app.invertebrado.co/api/account/login',
+      form
+    );
   }
 
-
-  getSubscribers() {
-    return this.http.get(`${this.url}subscribers/`);
+  /* Obtener Suscriptres */
+  getSubscribers(): Observable<subsI[]> {
+    return this.http.get<subsI[]>(`${this.url}subscribers`);
   }
 
-
-/* Funcion para decodificar el Token */
-  decodeToken(): any {
-    let token = localStorage.getItem('Token');
-    let decoded = jwtDecode(token || 'Error en token'); // retornar el payload del token
-    return decoded;
-  }
-  logOut() {
-    localStorage.removeItem('Token');
-    this.router.navigate(['/login']);
-    
+  /* Consultar 1 suscriptor */
+  getSub(id: any): Observable<subsI> {
+    return this.http.get<subsI>(`${this.url}subscribers/${id}`);
   }
 
-  isLoggedIn() {
-    let token = localStorage.getItem('Token') || false;
-
-    if (token) {
-      return true;
-    }
-
-    return false;
+  /* Actualizar Suscriptor */
+  updateSub(form: subsI, id: any): Observable<ResponseI> {
+    return this.http.put<ResponseI>(`${this.url}subscribers/${id}`, form);
+  }
+/* Eliminar Suscriptor */
+  deleteSub(form: subsI, id: any): Observable<ResponseI> {
+    let Options = {
+      Headers: new HttpHeaders({
+        'Content-type': 'application/json',
+      }),
+      body: form,
+    };
+    return this.http.delete<ResponseI>(
+      `${this.url}subscribers/${id}`,
+      Options
+    );
   }
 
-
-  setToken(token: string ) {
-    this.cookies.set("Token", token);
-    
+  /* Agregar Suscriptor */
+  createSub(form:string):Observable<ResponseI>{
+    return this.http.post<ResponseI>(`${this.url}subscribers/`,form)
   }
-  getToken() {
-    return this.cookies.get("Token");
-  }
-
-  getUserLogged() {
-    const token = this.getToken();
-    // Aquí iría el endpoint para devolver el usuario para un token
-  }
-
 }
-
-
-
-   
-
-
-

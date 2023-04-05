@@ -1,30 +1,40 @@
-<!-- Devs -->
-<div class="d-flex flex-row">
-    <div class="container-fluid px-5 d-flex flex-column justify-content-evenly ">
-        <table class="table " style="max-width: 5rem;">
-          <thead>
-            <tr style="color: white; ">
-              <th></th>
-              <th>Nombre</th>
-              <th>Email</th>
-              <th>Codigo De Pais</th>
-              <th>Telefono</th>
-              <th>Trabajo</th>
-              <th>Area</th>
-              <th>Temas</th>
-            </tr>
-          </thead>
-          <tbody style="color: white; ">
-            <tr *ngFor="let sub of this.apir.subs.data">
-              <td>{{ sub.Name}}</td>
-              <td>{{ sub.Email}}</td>
-              <td>{{ sub.CountryCode}}</td>
-              <td>{{ sub.PhoneNumber}}</td>
-              <td>{{ sub.JobTitle}}</td>
-              <td>{{ sub.Area}}</td>
-              <td>{{ sub.Topics}}</td>
-              
-            </tr>
-          </tbody>
-        </table>
-      
+<div class="container">
+  <h3>Lista de suscriptores</h3>
+  <br />
+  <button type="button" class="btn btn-outline-primary m-3" (click)="newSub()">
+    Agregar Suscriptor
+  </button>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Email</th>
+        <th scope="col">Telefono</th>
+        <th scope="col">Estado De Suscipcion</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let sub of this.apir.subs.Data">
+        <th scope="row">{{ sub.Id }}</th>
+        <td>{{ sub.Name }}</td>
+        <td>{{ sub.Email }}</td>
+        <td>{{ sub.PhoneCodeAndNumber }}</td>
+        <td>{{ sub.SubscriptionStateDescription }}</td>
+        <td>
+          <div
+            class="container d-flex justify-content-center align-items-center"
+          >
+            <button class="btn btn-warning" (click)="edit(sub.Id)">
+              Editar
+            </button>
+            <button class="btn btn-danger m-3" (click)="delete(sub.Id)">
+              Eliminar
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
