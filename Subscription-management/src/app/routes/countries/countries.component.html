@@ -1,0 +1,63 @@
+<div class="container counContainer mt-4">
+  <div class="d-flex justify-content-between">
+    <h4 class="m-4">Buscar por Nombre</h4>
+    <h4 class="m-4 rf">Reiniciar Filtros</h4>
+    <h4 class="m-4">Buscar Por Numero De Pagina</h4>
+  </div>
+  <div class="d-flex justify-content-around">
+    <input
+      type="text"
+      class="form-control m-3 w-50"
+      placeholder="Buscar..."
+      #searchByName
+      (keyup)="searchName(searchByName.value)"
+      min="1"
+      max="10"
+    />
+    <button class="btn" (click)="reset()">
+      <i class="material-icons text-primary">autorenew</i>
+    </button>
+
+    <input
+      type="number"
+      class="form-control m-3 w-50"
+      placeholder="Buscar..."
+      #cathPage
+      (keyup)="cattch(cathPage.value)"
+    />
+  </div>
+  <table class="table container">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Codigo</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Codigo de telefono</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let country of this.apir.countries.Data
+            | countryFilter : page : search
+        "
+      >
+        <td>{{ country.Code }}</td>
+        <td>{{ country.Name }}</td>
+        <td>{{ country.PhoneCode }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="btn m-3" (click)="prevPage()">
+    <i class="material-icons text-primary">arrow_back</i>
+  </button>
+
+  <button
+    class="btn ,-3"
+    (click)="nextPage()"
+    [disabled]="
+      (this.apir.countries.Data | countryFilter : page : search).length === 0
+    "
+  >
+    <i class="material-icons text-primary">arrow_forward</i>
+  </button>
+</div>

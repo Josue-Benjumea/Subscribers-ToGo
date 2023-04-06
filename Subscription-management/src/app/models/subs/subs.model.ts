@@ -1,3 +1,4 @@
+/* Modelo del suscriptor completo */
 export interface subsI{
   SystemId: any,
   Area: string,

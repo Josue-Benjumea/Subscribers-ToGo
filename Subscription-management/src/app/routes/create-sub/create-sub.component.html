@@ -1,25 +1,24 @@
-<form  [formGroup]="newSub" (ngSubmit)="postForm(newSub.value)" >
-  <div class="form-group">
+<div class="container m-4 w-100 d-flex fc justify-content-center alig-items-center">
+<form [formGroup]="newSub" (ngSubmit)="postForm(newSub.value)" class="d-flex  flex-column w-50 justify-content-center alig-items-center" >
+  <div class="form-group w-100">
     <label for="exampleFormControlInput1">Nombre</label>
     <input
       type="text"
       class="form-control"
       placeholder="Name"
       formControlName="Name"
-      
     />
   </div>
-  <div class="form-group">
+  <div class="form-group  w-100">
     <label for="exampleFormControlInput1">Email</label>
     <input
       type="text"
       class="form-control"
       placeholder="Email"
       formControlName="Email"
-     
     />
   </div>
-  <div class="form-group">
+  <div class="form-group  w-100">
     <label for="exampleFormControlInput1">Codigo del pais</label>
     <input
       type="text"
@@ -28,7 +27,7 @@
       formControlName="CountryCode"
     />
   </div>
-  <div class="form-group">
+  <div class="form-group  w-100">
     <label for="exampleFormControlInput1">Telefono</label>
     <input
       type="number"
@@ -37,7 +36,7 @@
       formControlName="PhoneNumber"
     />
   </div>
-  <div class="form-group">
+  <div class="form-group  w-100">
     <label for="exampleFormControlInput1">Area</label>
     <input
       type="text"
@@ -46,7 +45,7 @@
       formControlName="Area"
     />
   </div>
-  <div class="form-group">
+  <div class="form-group  w-100">
     <label for="exampleFormControlInput1">Nombre Del Trabajo</label>
     <input
       type="text"
@@ -55,7 +54,7 @@
       formControlName="JobTitle"
     />
   </div>
-  <div class="form-group">
+  <div class="form-group  w-100">
     <label for="exampleFormControlInput1">Temas</label>
     <input
       type="[]"
@@ -65,6 +64,7 @@
     />
   </div>
   <br />
-  <button type="submit" class="btn btn-success" >Guardar</button>
- 
+  <button type="submit" class="btn btn-success w-25">Guardar</button>
 </form>
+<img src="../../../assets/patata.png" class="w-50" alt="">
+</div>

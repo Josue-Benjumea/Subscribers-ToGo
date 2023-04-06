@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
-import { LoginI } from '../models/login/login.module';
-import { ResponseI } from '../models/response/response.module';
-import { subsI } from '../models/subs/subs.module';
-import { CreateSubI } from '../models/create/create.module';
-import { AnyArray } from 'mongoose';
+import { LoginI } from '../models/login/login.model';
+import { ResponseI } from '../models/response/response.model';
+import { subsI } from '../models/subs/subs.model';
+import { CreateSubI } from '../models/create/create.model';
+import { countryI } from '../models/countries/countries.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,16 +16,16 @@ import { AnyArray } from 'mongoose';
 export class ApirService {
   url = 'https://lab.app.invertebrado.co/api/';
   subs: any;
+  countries: any;
+
   currentSub: subsI | any;
-  currentCreate: CreateSubI | any; 
+  currentCreate: CreateSubI | any;
 
   constructor(
     private http: HttpClient,
     public router: Router,
     private cookies: CookieService
-  ) {
-   
-  }
+  ) {}
 
   /* Funcion de Login */
   login(form: LoginI): Observable<ResponseI> {
@@ -40,6 +40,15 @@ export class ApirService {
     return this.http.get<subsI[]>(`${this.url}subscribers`);
   }
 
+  /* Obtener Paises */
+  getCountries(): Observable<countryI[]> {
+    return this.http.get<countryI[]>(`${this.url}countries/?count=255`);
+  }
+  /* Obtener Paises */
+  getCountriesPage(page: any): Observable<countryI[]> {
+    return this.http.get<countryI[]>(`${this.url}countries/?page=${page}`);
+  }
+
   /* Consultar 1 suscriptor */
   getSub(id: any): Observable<subsI> {
     return this.http.get<subsI>(`${this.url}subscribers/${id}`);
@@ -49,7 +58,7 @@ export class ApirService {
   updateSub(form: subsI, id: any): Observable<ResponseI> {
     return this.http.put<ResponseI>(`${this.url}subscribers/${id}`, form);
   }
-/* Eliminar Suscriptor */
+  /* Eliminar Suscriptor */
   deleteSub(form: subsI, id: any): Observable<ResponseI> {
     let Options = {
       Headers: new HttpHeaders({
@@ -57,10 +66,7 @@ export class ApirService {
       }),
       body: form,
     };
-    return this.http.delete<ResponseI>(
-      `${this.url}subscribers/${id}`,
-      Options
-    );
+    return this.http.delete<ResponseI>(`${this.url}subscribers/${id}`, Options);
   }
 
   logOut() {
@@ -81,23 +87,12 @@ export class ApirService {
   decodeToken(): any {
     let token = localStorage.getItem('token');
     let decoded = jwtDecode(token || 'Error en token');
-    console.log(decoded) // retornar el payload del token
+    console.log(decoded); // retornar el payload del token
     return decoded;
   }
 
-
-
-
   /* Agregar Suscriptor */
-  createSub(form:CreateSubI):Observable<CreateSubI>{
-  
-    
-    return this.http.post<CreateSubI>(`${this.url}subscribers`,form)
+  createSub(form: CreateSubI): Observable<CreateSubI> {
+    return this.http.post<CreateSubI>(`${this.url}subscribers`, form);
   }
-
-
-  
-
-
-
 }

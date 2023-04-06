@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { last } from 'rxjs';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { subsI } from 'src/app/models/subs/subs.module';
+import { subsI } from 'src/app/models/subs/subs.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -14,6 +14,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class HomeComponent {
   constructor(public apir: ApirService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.getSubs();
+  }
+
+  /* Captura de datos */
   Edit = new FormGroup({
     Id: new FormControl(''),
     Name: new FormControl(''),
@@ -26,9 +32,23 @@ export class HomeComponent {
   });
 
   subs: subsI[] | undefined;
+  public page: number = 0;
+  public search: string = '';
 
-  ngOnInit(): void {
-    this.getSubs();
+  /* Filtro De Pagina Siguiente */
+  nextPage() {
+    this.page += 3;
+  }
+
+  /* Filtro De Pagina Anterior */
+  prevPage() {
+    if (this.page > 0) this.page -= 3;
+  }
+
+  /* Filtro Busqueda Por Nombre */
+  searchName(search: string) {
+    this.page = 0;
+    this.search = search;
   }
 
   /* Obtenemos suscriptores */
@@ -43,6 +63,9 @@ export class HomeComponent {
   /* Editamos Suscriptores */
   edit(id: number) {
     this.router.navigate(['edit', id]);
+  }
+  details(id: number) {
+    this.router.navigate(['details', id]);
   }
 
   /*Eliminar Sub  */
@@ -71,8 +94,12 @@ export class HomeComponent {
     });
   }
 
-  /* Creamos Suscriptres */
+  /* Navegar a creacion de  Suscriptores */
   newSub() {
     this.router.navigate(['nuevo']);
+  }
+  /* Navegar a consulta de  paises */
+  countries() {
+    this.router.navigate(['countries']);
   }
 }

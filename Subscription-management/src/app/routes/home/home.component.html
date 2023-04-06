@@ -1,9 +1,23 @@
 <div class="container">
-  <h3>Lista de suscriptores</h3>
-  <br />
+  <h4 class="m-4">Buscar por Nombre</h4>
+  <input
+    type="text"
+    class="form-control m-3 w-75"
+    placeholder="Buscar..."
+    #searchByName
+    (keyup)="searchName(searchByName.value)"
+  />
   <button type="button" class="btn btn-outline-primary m-3" (click)="newSub()">
     Agregar Suscriptor
   </button>
+  <button
+    type="button"
+    class="btn btn-outline-primary m-3"
+    (click)="countries()"
+  >
+    Consultar Paises
+  </button>
+
   <table class="table">
     <thead class="thead-dark">
       <tr>
@@ -16,25 +30,38 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let sub of this.apir.subs.Data">
+      <tr *ngFor="let sub of this.apir.subs.Data | subsFilter : page : search">
         <th scope="row">{{ sub.Id }}</th>
         <td>{{ sub.Name }}</td>
         <td>{{ sub.Email }}</td>
         <td>{{ sub.PhoneCodeAndNumber }}</td>
         <td>{{ sub.SubscriptionStateDescription }}</td>
+
         <td>
-          <div
-            class="container d-flex justify-content-center align-items-center"
-          >
-            <button class="btn btn-warning" (click)="edit(sub.Id)">
-              Editar
+          <div class="d-flex justify-content-center align-items-center">
+            <button class="btn" (click)="edit(sub.Id)">
+              <i class="material-icons text-warning">edit</i>
             </button>
-            <button class="btn btn-danger m-3" (click)="delete(sub.Id)">
-              Eliminar
+            <button class="btn m-3" (click)="delete(sub.Id)">
+              <i class="material-icons text-danger">delete_forever</i>
+            </button>
+            <button class="btn btn-white m-3" (click)="details(sub.Id)">
+              <i class="material-icons text-dark">search_icon</i>
             </button>
           </div>
         </td>
       </tr>
     </tbody>
   </table>
+  <button class="btn m-3" (click)="prevPage()">
+    <i class="material-icons text-primary">arrow_back</i>
+  </button>
+
+  <button
+    class="btn ,-3"
+    (click)="nextPage()"
+    [disabled]="(this.apir.subs.Data | subsFilter : page : search).length === 0"
+  >
+    <i class="material-icons text-primary">arrow_forward</i>
+  </button>
 </div>

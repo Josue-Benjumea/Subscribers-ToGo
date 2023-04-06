@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { subsI } from 'src/app/models/subs/subs.module';
+import { subsI } from 'src/app/models/subs/subs.model';
 import { ApirService } from 'src/app/services/apir.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';

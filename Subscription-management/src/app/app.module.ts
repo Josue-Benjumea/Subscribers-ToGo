@@ -10,6 +10,11 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { TokenInterceptor } from './interceptor/token.interceptor';
 import { CreateSubComponent } from './routes/create-sub/create-sub.component';
 import { EditComponent } from './routes/edit/edit.component';
+import { SubsFilterPipe } from './filters/subs-filter.pipe';
+import { DetailsComponent } from './routes/details/details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CountriesComponent } from './routes/countries/countries.component';
+import { CountryFilterPipe } from './filters/country-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -18,16 +23,23 @@ import { EditComponent } from './routes/edit/edit.component';
     HomeComponent,
     NavbarComponent,
     CreateSubComponent,
-    EditComponent
+    EditComponent,
+    SubsFilterPipe,
+    DetailsComponent,
+    CountriesComponent,
+    CountryFilterPipe,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

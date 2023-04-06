@@ -1,9 +1,12 @@
 <div class="login">
-
-    <div class="form-container">
-        <img src="../../../assets/jan-antonin-kolar-YNP2p8bAflo-unsplash.jpg"  class="imgbanner" alt="">
-    <form class="custom-form" method="post" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
-
+  <div class="form-container">
+    <img src="../../../assets/patata.png" class="imgbanner" alt="" />
+    <form
+      class="custom-form"
+      method="post"
+      [formGroup]="loginForm"
+      (ngSubmit)="login(loginForm.value)"
+    >
       <h1>Login</h1>
       <input
         type="UserName"
@@ -14,14 +17,14 @@
       />
       <input
         type="Password"
-         formControlName="Password"
+        formControlName="Password"
         name="Password"
         placeholder="Password"
         required="required"
       />
       <div class="button-container">
-      <button type="submit">Log in</button>
-    </div>
+        <button type="submit">Log in</button>
+      </div>
     </form>
-</div>
   </div>
+</div>

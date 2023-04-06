@@ -6,9 +6,9 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AdminGuard implements CanActivate {
- 
- constructor(public router:Router){}
 
+ constructor(public router:Router){}
+/* Validamos si esta logueado por medio del token, si si damos accesso con un true a ciertas rutas */
   canActivate(){
 
     let token = localStorage.getItem('token') || ""
@@ -21,5 +21,5 @@ export class AdminGuard implements CanActivate {
     return false
 
   }
-  
+
 }
