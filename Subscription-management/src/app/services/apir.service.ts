@@ -39,7 +39,7 @@ export class ApirService {
 
   /* Obtener Suscriptres */
   getSubscribers(): Observable<subsI[]> {
-    return this.http.get<subsI[]>(`${this.url}subscribers`);
+    return this.http.get<subsI[]>(`${this.url}subscribers/`);
   }
 
   /* Obtener Paises */

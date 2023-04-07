@@ -65,6 +65,7 @@ export class HomeComponent {
 
     response.subscribe((res: any) => {
       this.apir.subs = res;
+      console.log(res)
     });
   }
   /* Editamos Suscriptores y mandamos parametros de id por url para editar  */
