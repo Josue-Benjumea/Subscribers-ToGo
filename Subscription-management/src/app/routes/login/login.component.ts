@@ -7,7 +7,11 @@ import { Title } from '@angular/platform-browser';
 import { LoginI } from 'src/app/models/login/login.model';
 import { Observable } from 'rxjs';
 import { ResponseI } from 'src/app/models/response/response.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Token } from '@angular/compiler';
 
 @Component({
@@ -31,7 +35,7 @@ export class LoginComponent {
   ngOnInit(): void {
     this.checkLS();
   }
-/* Verficiamos si tiene token, si si lo redireccionamos */
+  /* Verficiamos si tiene token, si si lo redireccionamos */
   checkLS() {
     if (localStorage.getItem('token')) {
       this.router.navigate(['home']);
@@ -48,20 +52,21 @@ export class LoginComponent {
         text: 'Something went wrong!',
       });
     } else {
-    /* Validacion de Credenciales */
+      /* Validacion de Credenciales */
       console.log(form);
       this.apir.login(form).subscribe(
         (data) => {
           let dataResponse: ResponseI = data;
           if (dataResponse.Status === 1) {
             localStorage.setItem('token', dataResponse.Token);
+
             this.router.navigate(['home']);
           }
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           Swal.fire({
             icon: 'error',
-            title: error.error.error,
+            title: 'Credenciales incorrectas',
             text: 'Something went wrong!',
           });
         }

@@ -1,3 +1,4 @@
+/* Intercepta todas las peticiones para mandar el token a travez del header */
 import { Injectable } from '@angular/core';
 import {
   HttpInterceptor,
@@ -19,6 +20,7 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     req = req.clone({
+      /* En los headers por medio del bearer enviamos el token almacenado en el localStorage */
       setHeaders: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
@@ -26,17 +28,17 @@ export class TokenInterceptor implements HttpInterceptor {
     /* Logout automatico */
     return next.handle(req).pipe(
       catchError((err: HttpErrorResponse) => {
-        console.log('ERROR', err.status);
-
+        console.log('ERROR', err.status, err.error.error);
+        /*Atrapamos el error 401 el cual se nos envia cuando el token no es valido y expira  */
         if (err.status === 401) {
-          this.handler401Error();
+          this.handler401Error(); /* En caso que pase este error, se hara un auto logout */
         }
 
         return throwError('ERROR EXTRA');
       })
     );
   }
-  /* Manejo de error 407 auto logout cuando expira el token */
+  /* Funcion para el Manejo de error 401 auto logout cuando expira el token */
   private handler401Error(): Observable<any> {
     this.apir.logOut();
     Swal.fire(

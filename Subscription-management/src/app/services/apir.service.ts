@@ -19,13 +19,15 @@ export class ApirService {
   countries: any;
 
   currentSub: subsI | any;
-  currentCreate: CreateSubI | any;
+  currentCreate: CreateSubI;
 
   constructor(
     private http: HttpClient,
     public router: Router,
     private cookies: CookieService
-  ) {}
+  ) {
+    this.currentCreate = new CreateSubI();
+  }
 
   /* Funcion de Login */
   login(form: LoginI): Observable<ResponseI> {
@@ -44,7 +46,7 @@ export class ApirService {
   getCountries(): Observable<countryI[]> {
     return this.http.get<countryI[]>(`${this.url}countries/?count=255`);
   }
-  /* Obtener Paises */
+  /* Obtener Paises por pagina*/
   getCountriesPage(page: any): Observable<countryI[]> {
     return this.http.get<countryI[]>(`${this.url}countries/?page=${page}`);
   }
@@ -69,11 +71,39 @@ export class ApirService {
     return this.http.delete<ResponseI>(`${this.url}subscribers/${id}`, Options);
   }
 
+  /* Agregar Suscriptor */
+  createSub(form: CreateSubI): Observable<ResponseI> {
+    let Options = {
+      setHeaders: new HttpHeaders({
+        'Content-type': 'application/json',
+      }),
+      body: {
+        Subscribers: ([] = [
+          {
+            Name: (this.currentCreate.Name = form.Name),
+            Email: (this.currentCreate.Email = form.Email),
+            CountryCode: (this.currentCreate.CountryCode = form.CountryCode),
+            PhoneNumber: (this.currentCreate.PhoneNumber = form.PhoneNumber),
+            JobTitle: (this.currentCreate.JobTitle = form.JobTitle),
+            Area: (this.currentCreate.Area = form.Area),
+            Topics: (this.currentCreate.Topics = form.Topics),
+          },
+        ]),
+      },
+    };
+    JSON.stringify(Options.body);
+    return (
+      console.log(Options.body),
+      this.http.post<ResponseI>(`${this.url}subscribers`, Options)
+    );
+  }
+/* Cerrar sesion */
   logOut() {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
     return;
   }
+  /* Verifica si esta logueado */
   isLoggedIn() {
     let token = localStorage.getItem('token') || false;
 
@@ -83,16 +113,11 @@ export class ApirService {
 
     return false;
   }
-
+/* Decodifica el token */
   decodeToken(): any {
     let token = localStorage.getItem('token');
     let decoded = jwtDecode(token || 'Error en token');
     console.log(decoded); // retornar el payload del token
     return decoded;
-  }
-
-  /* Agregar Suscriptor */
-  createSub(form: CreateSubI): Observable<CreateSubI> {
-    return this.http.post<CreateSubI>(`${this.url}subscribers`, form);
   }
 }

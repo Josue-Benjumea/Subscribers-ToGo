@@ -16,7 +16,15 @@ export class HomeComponent {
   constructor(public apir: ApirService, private router: Router) {}
 
   ngOnInit(): void {
+    /* Obtenemos los datos */
     this.getSubs();
+      /*Informamos que se esta cargando  */
+    Swal.fire({
+      title: 'Cargando Datos',
+      html: 'Por favor espere un momento',
+      timer: 2000,
+      timerProgressBar: true,
+    });
   }
 
   /* Captura de datos */
@@ -57,19 +65,20 @@ export class HomeComponent {
 
     response.subscribe((res: any) => {
       this.apir.subs = res;
-      console.log(this.apir.subs);
     });
   }
-  /* Editamos Suscriptores */
+  /* Editamos Suscriptores y mandamos parametros de id por url para editar  */
   edit(id: number) {
     this.router.navigate(['edit', id]);
   }
+  /* Enviamos parametros de id por url para ver datos especificos de 1 usuario */
   details(id: number) {
     this.router.navigate(['details', id]);
   }
 
   /*Eliminar Sub  */
   delete(id: number) {
+    /* Advertencia de eliminacion */
     Swal.fire({
       title: 'Estas seguro de eliminar el elemento?',
       text: 'Esta accion no se podra deshacer',

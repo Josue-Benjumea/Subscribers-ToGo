@@ -16,9 +16,10 @@ export class EditComponent {
     public router: Router,
     public apir: ApirService
   ) {}
-
+  /* Obtenemos el ID del suscriptor a editar */
   subData: subsI | any;
   subId = this.activerouter.snapshot.paramMap.get('id');
+  /* Creamos un forgroup con la estructura que recibe el api para poder caputrar y enviar los datos */
   edit = new FormGroup({
     Id: new FormControl(''),
     Name: new FormControl(''),
@@ -32,13 +33,19 @@ export class EditComponent {
 
   ngOnInit(): void {
     /* Obtener el Id */
-    let subID = this.activerouter.snapshot.paramMap.get('id');
+    let subID =
+      this.activerouter.snapshot.paramMap.get(
+        'id'
+      ); /* guardamos el id en una variable rapida */
     /* Obtener Token */
     let token = this.getToken();
-    /* Obtener Informacion de 1 usuario */
+    /* Obtener Informacion de 1 usuario  y la almacenamos en data*/
     this.apir.getSub(subID).subscribe((data) => {
-      this.subData = data;
+      this.subData =
+        data; /* Igualamos el modelo de usuario con la data obtenida */
+      /* Editamos la data de 1 usuario obtenida con */
       this.edit.patchValue({
+        /* A la data obtenida con un patchvalue le hacemos cambios y retornamos */
         Id: this.subData.Id,
         Name: this.subData.Name,
         Email: this.subData.Email,
@@ -56,8 +63,10 @@ export class EditComponent {
   getToken() {
     return localStorage.getItem('token');
   }
+  /* Enviar los cambios */
   postForm(form: any, id: any) {
     this.apir.updateSub(form, id).subscribe((data) => {
+      /* Alerta de que los cambios han sido enviados */
       Swal.fire({
         position: 'center',
         icon: 'success',

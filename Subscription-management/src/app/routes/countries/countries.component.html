@@ -1,3 +1,4 @@
+<!-- Pagina donde mostramos todos los paises que nos arroja el API con metodos de paginacion y alfunos filtros -->
 <div class="container counContainer mt-4">
   <div class="d-flex justify-content-between">
     <h4 class="m-4">Buscar por Nombre</h4>
@@ -5,26 +6,35 @@
     <h4 class="m-4">Buscar Por Numero De Pagina</h4>
   </div>
   <div class="d-flex justify-content-around">
+    <!-- Nos permite buscar por nombre, captura lo escrito al soltar la tecla y lo pasa al filtro local por medio del pipe  -->
     <input
       type="text"
       class="form-control m-3 w-50"
       placeholder="Buscar..."
       #searchByName
       (keyup)="searchName(searchByName.value)"
-      min="1"
-      max="10"
+
     />
     <button class="btn" (click)="reset()">
       <i class="material-icons text-primary">autorenew</i>
     </button>
-
+<!-- Manejamos paginacion, la escribimos y accedemos a la pagina deseada
+ manda la pagina que se escribe al dejar de precionar la tecla al API y este devuelve la informacion
+de esa pagina -->
     <input
       type="number"
       class="form-control m-3 w-50"
       placeholder="Buscar..."
       #cathPage
       (keyup)="cattch(cathPage.value)"
+      min=1
+      max=26
+      enabled
+      value="1"
+
+
     />
+    <!-- tabla donde se mostrara la informacion de los paises -->
   </div>
   <table class="table container">
     <thead class="thead-dark">
@@ -47,10 +57,11 @@
       </tr>
     </tbody>
   </table>
+  <!-- Boto para ir una pagina atras -->
   <button class="btn m-3" (click)="prevPage()">
     <i class="material-icons text-primary">arrow_back</i>
   </button>
-
+<!-- Boton para ir una pagina adelante -->
   <button
     class="btn ,-3"
     (click)="nextPage()"

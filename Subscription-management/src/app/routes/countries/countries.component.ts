@@ -13,19 +13,28 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class CountriesComponent {
   constructor(public apir: ApirService, private router: Router) {}
-
+  /* Obtenemos los paises al cargar la pagina */
   ngOnInit(): void {
     this.getCountries();
-  }
-  public countries: countryI[] = [];
-  public page: number = 0;
-  public search: string = '';
-  public searchpage: number | any = 0;
+    Swal.fire({
+      title: 'Cargando Datos',
+      html: 'Por favor espere un momento',
+      timer: 2000,
+      timerProgressBar: true,
+    });
 
-  /* Obtenemos suscriptores */
+  }
+  public countries: countryI[] =
+    []; /* Variable paises que de tipo modelo de paises */
+  public page: number = 0; /* Variable para modificar la paginacion */
+  public search: string = ''; /* Variable para manejar los filtros */
+  public searchpage:
+    | number
+    | any = 0; /* Variable para manejar el filtro de pagina del API */
+
+  /* Obtenemos paises */
   getCountries() {
     let response = this.apir.getCountries();
-
     response.subscribe((res: any) => {
       this.apir.countries = res;
       console.log(this.apir.countries);
@@ -39,28 +48,36 @@ export class CountriesComponent {
 
   /* Filtro De Pagina Anterior */
   prevPage() {
-    if (this.page > 0) this.page -= 3;
+    if (this.page > 0)
+      this.page -= 3; /* Si la pagina no es 1 ira una pagina atras */
   }
 
   /* Filtro Busqueda Por Nombre */
   searchName(search: string) {
-    this.search = search;
+    /* Escucha al input con el onkey para saber el que se esta buscado */
+    this.search = search; /* Almacenamos la buscqueda en la variable local */
     console.log(search);
   }
 
   cattch(page: any) {
+    /* Escuchamos al input para saber que pagina se esta buscando */
     if (page === '') {
       page = 1;
     }
     this.searchpage = page;
-    let response = this.apir.getCountriesPage(page);
+    let response =
+      this.apir.getCountriesPage(
+        page
+      ); /* Le mandamos la pagina al API para que nos traiga la info respectiva */
     response.subscribe((res: any) => {
       this.apir.countries = res;
       console.log(this.apir.countries);
     });
   }
-
+  /* Reseteamos los filtros */
   reset() {
     window.location.reload();
   }
+
+
 }
