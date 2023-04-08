@@ -1,0 +1,19 @@
+@media (max-width:1030px) {
+  .tableC{
+    flex-wrap: wrap;
+    width: 100%;
+
+  }
+
+  .tC{
+    display: flex;
+    font-size: 10px;
+
+  }
+  .tD{
+    font-size: 9px;
+    display:flow-root
+
+
+  }
+}

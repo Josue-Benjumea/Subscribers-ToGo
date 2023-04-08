@@ -79,19 +79,10 @@
     cursor: pointer;
   }
 
-  @media (max-width = 1030px) {
+  @media (max-width : 1030px) {
     .custom-form{
-      height: 100%;
-    }
-  }
-  @media (min-width = 1030px) {
-    .custom-form{
-      height: 100%;
 
+      width: 85%;
     }
   }
-  @media (max-width = 1030px) {
-    .form-container{
-      height: 100%;
-    }
-  }
+

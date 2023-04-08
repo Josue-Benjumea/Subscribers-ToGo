@@ -71,33 +71,7 @@ export class ApirService {
     return this.http.delete<ResponseI>(`${this.url}subscribers/${id}`, Options);
   }
 
-  /* Agregar Suscriptor */
-  createSub(form: CreateSubI): Observable<ResponseI> {
-    let Options = {
-      setHeaders: new HttpHeaders({
-        'Content-type': 'application/json',
-      }),
-      body: {
-        Subscribers: ([] = [
-          {
-            Name: (this.currentCreate.Name = form.Name),
-            Email: (this.currentCreate.Email = form.Email),
-            CountryCode: (this.currentCreate.CountryCode = form.CountryCode),
-            PhoneNumber: (this.currentCreate.PhoneNumber = form.PhoneNumber),
-            JobTitle: (this.currentCreate.JobTitle = form.JobTitle),
-            Area: (this.currentCreate.Area = form.Area),
-            Topics: (this.currentCreate.Topics = form.Topics),
-          },
-        ]),
-      },
-    };
-    JSON.stringify(Options.body);
-    return (
-      console.log(Options.body),
-      this.http.post<ResponseI>(`${this.url}subscribers`, Options)
-    );
-  }
-/* Cerrar sesion */
+  /* Cerrar sesion */
   logOut() {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
@@ -113,7 +87,7 @@ export class ApirService {
 
     return false;
   }
-/* Decodifica el token */
+  /* Decodifica el token */
   decodeToken(): any {
     let token = localStorage.getItem('token');
     let decoded = jwtDecode(token || 'Error en token');

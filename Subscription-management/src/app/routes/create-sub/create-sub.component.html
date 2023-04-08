@@ -1,85 +1,83 @@
 <!-- Formulario para crear suscriptor -->
+
+<!-- Capturamos los datos por medio de un ngform y los enviamos con el ngsubmit -->
+
 <div
-  class="container m-4 w-100 d-flex fc justify-content-center alig-items-center"
+  class="container m-4 w-100 h-85 d-flex fc justify-content-center alig-items-center"
 >
-  <!-- Capturamos los datos por medio de un ngform y los enviamos con el ngsubmit -->
   <form
-    [formGroup]="newSub"
-    (ngSubmit)="postForm(newSub.value)"
+    (submit)="onSubmit()"
     class="d-flex flex-column w-50 justify-content-center alig-items-center"
   >
     <div class="form-group w-100">
-      <label for="exampleFormControlInput1">Nombre</label>
+      <label for="exampleFormControlInput1">Nombre: </label>
       <input
         type="text"
-        class="form-control"
-        placeholder="Name"
-        formControlName="Name"
+        [(ngModel)]="Name"
+        name="Name"
         required
+        class="form-control"
       />
     </div>
     <div class="form-group w-100">
-      <label for="exampleFormControlInput1">Email</label>
+      <label for="exampleFormControlInput1">Email: </label>
       <input
-        type="text"
-        class="form-control"
-        placeholder="Email"
-        formControlName="Email"
+        type="Email"
+        [(ngModel)]="Email"
+        name="Email"
         required
+        class="form-control"
+        placeholder="direccion@dominio.algo"
       />
     </div>
     <div class="form-group w-100">
-      <label for="exampleFormControlInput1">Codigo del pais</label>
+      <label for="exampleFormControlInput1">Codigo Del Pais: </label>
       <input
         type="text"
-        class="form-control"
-        placeholder="CountryCode"
-        formControlName="CountryCode"
+        [(ngModel)]="CountryCode"
+        name="CountryCode"
+        placeholder="Codigo de un pais existente ejm CO, EU, etc. Los podra ver en el boton de abajo"
         required
+        class="form-control"
+      />
+
+    </div>
+    <div class="form-group w-100">
+      <label for="exampleFormControlInput1">Telefono: </label>
+      <input
+        type="number"
+        [(ngModel)]="PhoneNumber"
+        name="PhoneNumber"
+        required
+        class="form-control"
       />
     </div>
     <div class="form-group w-100">
-      <label for="exampleFormControlInput1">Telefono</label>
+      <label for="exampleFormControlInput1">Titulo del tabajo: </label>
       <input
         type="text"
-        class="form-control"
-        placeholder="PhoneNumber"
-        formControlName="PhoneNumber"
+        [(ngModel)]="JobTitle"
+        name="JobTitle"
         required
+        class="form-control"
       />
     </div>
     <div class="form-group w-100">
-      <label for="exampleFormControlInput1">Area</label>
+      <label for="exampleFormControlInput1">Area de trabajo: </label>
       <input
         type="text"
-        class="form-control"
-        placeholder="Area"
-        formControlName="Area"
+        [(ngModel)]="Area"
+        name="Area"
         required
+        class="form-control"
       />
     </div>
-    <div class="form-group w-100">
-      <label for="exampleFormControlInput1">Nombre Del Trabajo</label>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="JobTitle"
-        formControlName="JobTitle"
-        required
-      />
-    </div>
-    <div class="form-group w-100">
-      <label for="exampleFormControlInput1">Temas</label>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Topics"
-        formControlName="Topics"
-        required
-      />
-    </div>
-    <br />
-    <button type="submit" class="btn btn-success w-25">Guardar</button>
+    <div class="d-flex justify-content-around m-4 bs">
+    <button type="submit" class="btn btn-success ">Guardar</button>
+    <button type="button" class="btn btn-primary   " [routerLink]="['/countries']"> Ver Codigos De Paises</button>
+    <button type="button" class="btn btn-danger   " [routerLink]="['/home']"> Cancelar</button>
+  </div>
+
   </form>
-  <img src="../../../assets/patata.png" class="w-50" alt="" />
+  <img src="../../../assets/patata.png" class="w-50 c" alt="" />
 </div>

@@ -54,23 +54,14 @@ export class LoginComponent {
     } else {
       /* Validacion de Credenciales */
       console.log(form);
-      this.apir.login(form).subscribe(
-        (data) => {
-          let dataResponse: ResponseI = data;
-          if (dataResponse.Status === 1) {
-            localStorage.setItem('token', dataResponse.Token);
+      this.apir.login(form).subscribe((data) => {
+        let dataResponse: ResponseI = data;
+        if (dataResponse.Status === 1) {
+          localStorage.setItem('token', dataResponse.Token);
 
-            this.router.navigate(['home']);
-          }
-        },
-        (error: HttpErrorResponse) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Credenciales incorrectas',
-            text: 'Something went wrong!',
-          });
+          this.router.navigate(['home']);
         }
-      );
+      });
     }
   }
 }

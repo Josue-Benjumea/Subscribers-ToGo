@@ -2,9 +2,9 @@
 <div class="container w-100">
   <h1 class="m-4">Datos Personales ID:{{ this.apir.subs.Id }}</h1>
 
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
+  <table class="table tableC">
+    <thead class="thead-dark tC">
+      <tr class="tC">
         <th scope="col">Nombre</th>
         <th scope="col">Email</th>
         <th scope="col">Trabajo</th>
@@ -14,22 +14,22 @@
         <th scope="col">Pais</th>
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <td>{{ this.apir.subs.Name }}</td>
-        <td>{{ this.apir.subs.Email }}</td>
-        <td>{{ this.apir.subs.JobTitle }}</td>
-        <td>{{ this.apir.subs.Area }}</td>
-        <td>{{ this.apir.subs.PhoneCodeAndNumber }}</td>
-        <td>{{ this.apir.subs.CountryCode }}</td>
-        <td>{{ this.apir.subs.CountryName }}</td>
+    <tbody class="tD">
+      <tr class="tD">
+        <td class="tD">{{ this.apir.subs.Name }}</td>
+        <td class="tD">{{ this.apir.subs.Email }}</td>
+        <td class="tD">{{ this.apir.subs.JobTitle }}</td>
+        <td class="tD">{{ this.apir.subs.Area }}</td>
+        <td class="tD">{{ this.apir.subs.PhoneCodeAndNumber }}</td>
+        <td class="tD">{{ this.apir.subs.CountryCode }}</td>
+        <td class="tD">{{ this.apir.subs.CountryName }}</td>
       </tr>
     </tbody>
   </table>
 
   <h1 class="m-4">Datos De Suscripcion</h1>
-  <table class="table">
-    <thead class="thead-dark">
+  <table class="table tableC">
+    <thead class="thead-dark tableC tC">
       <tr>
         <th scope="col">Actividad</th>
         <th scope="col">Ultima Actividad</th>
@@ -39,14 +39,14 @@
         <th scope="col">Estado de suscripcion</th>
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <th scope="row">{{ this.apir.subs.Activity }}</th>
-        <td>{{ this.apir.subs.LastActivityString }}</td>
-        <td>{{ this.apir.subs.LastActivityUtc }}</td>
-        <td>{{ this.apir.subs.SubscriptionDate }}</td>
-        <td>{{ this.apir.subs.SubscriptionMethod }}</td>
-        <td>{{ this.apir.subs.SubscriptionStateDescription }}</td>
+    <tbody class="tD">
+      <tr class="tD">
+        <th scope="row" class="tD">{{ this.apir.subs.Activity }}</th>
+        <td class="tD">{{ this.apir.subs.LastActivityString }}</td>
+        <td class="tD">{{ this.apir.subs.LastActivityUtc }}</td>
+        <td class="tD">{{ this.apir.subs.SubscriptionDate }}</td>
+        <td class="tD">{{ this.apir.subs.SubscriptionMethod }}</td>
+        <td class="tD">{{ this.apir.subs.SubscriptionStateDescription }}</td>
       </tr>
     </tbody>
   </table>

@@ -1,5 +1,5 @@
 <!-- Informacion general de los sucriptres -->
-<div class="container">
+<div class="container tableC">
   <h4 class="m-4">Buscar por Nombre</h4> <!-- Filtro que nos permite buscar introducioendo el nombre
                                             cuando se deja de escribir el keyup manda lo que se introdujo -->
   <input
@@ -21,34 +21,34 @@
     Consultar Paises
   </button>
 <!-- Tabla con la informacion del usuario -->
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Email</th>
-        <th scope="col">Telefono</th>
-        <th scope="col">Estado De Suscipcion</th>
-        <th scope="col">Acciones</th>
+  <table class="table ">
+    <thead class="thead-dark tC">
+      <tr class="tC">
+        <th scope="col" class="tC">ID</th>
+        <th scope="col" class="tC">Nombre</th>
+        <th scope="col" class="tC">Email</th>
+        <th scope="col" class="tC">Telefono</th>
+        <th scope="col" class="tC">Estado De Suscipcion</th>
+        <th scope="col" class="tC">Acciones</th>
       </tr>
     </thead>
-    <tbody>
-      <tr *ngFor="let sub of this.apir.subs.Data | subsFilter : page : search"> <!-- Aqui aplicamos los filtros del pipe -->
-        <th scope="row">{{ sub.Id }}</th>
-        <td>{{ sub.Name }}</td>
-        <td>{{ sub.Email }}</td>
-        <td>{{ sub.PhoneCodeAndNumber }}</td>
-        <td>{{ sub.SubscriptionStateDescription }}</td>
+    <tbody class="tD">
+      <tr *ngFor="let sub of this.apir.subs.Data | subsFilter : page : search" class="tD"> <!-- Aqui aplicamos los filtros del pipe -->
+        <th scope="row" class="tD">{{ sub.Id }}</th>
+        <td  scope="row" class="tD">{{ sub.Name }}</td>
+        <td  scope="row" class="tD">{{ sub.Email }}</td>
+        <td  scope="row" class="tD">{{ sub.PhoneCodeAndNumber }}</td>
+        <td  scope="row" class="tD">{{ sub.SubscriptionStateDescription }}</td>
 
         <td>
-          <div class="d-flex justify-content-center align-items-center">
-            <button class="btn" (click)="edit(sub.Id)">
+          <div class="d-flex justify-content-center align-items-center  ">
+            <button class="btn " (click)="edit(sub.Id)">
               <i class="material-icons text-warning">edit</i> <!-- Boton para editar -->
             </button>
-            <button class="btn m-3" (click)="delete(sub.Id)">
+            <button class="btn m-3 " (click)="delete(sub.Id)">
               <i class="material-icons text-danger">delete_forever</i> <!-- Boton para borrar -->
             </button>
-            <button class="btn btn-white m-3" (click)="details(sub.Id)"> <!-- Boton para ver detalles -->
+            <button class="btn btn-white m-3 " (click)="details(sub.Id)"> <!-- Boton para ver detalles -->
               <i class="material-icons text-dark">search_icon</i>
             </button>
           </div>

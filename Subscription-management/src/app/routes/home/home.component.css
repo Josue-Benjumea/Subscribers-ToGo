@@ -1,6 +1,21 @@
-.container{
+.container {
   background-color: rgba(201, 196, 196, 0.199);
   margin-top: 10px;
   border-radius: 10px;
   box-shadow: black 0px 5px 20px 1px;
+}
+@media (max-width: 1030px) {
+  .tableC {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .tC {
+    display: flex;
+    font-size: 10px;
+  }
+  .tD {
+    font-size: 9px;
+    display: flow-root;
+  }
 }

@@ -35,3 +35,29 @@
 .edit-Img{
   width: 50%;
 }
+@media (max-width:1030px) {
+  .form-group input{
+    width: 85%;
+
+  }
+
+  .form-group label{
+    width: 85%;
+  }
+  .edit-Img{
+    width: 50%;
+
+}
+.b1{
+  width: 50%;
+  padding: 0px;
+}
+.b2{
+  width: 50%;
+  margin: 2px;
+
+}
+.edit-Cont{
+  border-radius: 1px;
+}
+}

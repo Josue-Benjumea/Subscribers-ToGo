@@ -28,6 +28,12 @@ export class TokenInterceptor implements HttpInterceptor {
     /* Logout automatico */
     return next.handle(req).pipe(
       catchError((err: HttpErrorResponse) => {
+        /* Alerta de error */
+        Swal.fire({
+          icon: 'error',
+          title: err.status,
+          text: err.error.error,
+        });
         console.log('ERROR', err.status, err.error.error);
         /*Atrapamos el error 401 el cual se nos envia cuando el token no es valido y expira  */
         if (err.status === 401) {

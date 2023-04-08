@@ -1,5 +1,15 @@
 .fc {
   background-color: rgba(87, 86, 86, 0.192);
-  border-radius: 50px;
+  border-radius: 10px;
   box-shadow: black 1px 1px 50px 1px;
+}
+@media (max-width:1030px) {
+  .bs{
+    display: block;
+    flex-wrap: wrap;
+  }
+  .btn{
+    margin:2px;
+  }
+
 }
